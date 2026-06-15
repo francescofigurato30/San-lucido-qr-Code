@@ -3,559 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>San Lucido — Perla del Tirreno</title>
+<title>San Lucido - Perla del Tirreno</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-  :root {
-    --sand: #e8ddd0;
-    --sea: #2a6b7c;
-    --deep: #0f2d38;
-    --gold: #c9a96e;
-    --cream: #faf7f2;
-    --text: #1a1a1a;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--cream);
-    color: var(--text);
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-  }
-
-  .hero {
-    position: relative;
-    height: 100vh;
-    min-height: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background: var(--deep);
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0.5;
-    transform: scale(1.05);
-    animation: slowZoom 20s ease-in-out infinite alternate;
-  }
-
-  @keyframes slowZoom {
-    from { transform: scale(1.05); }
-    to   { transform: scale(1.12); }
-  }
-
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(15,45,56,0.2) 0%, rgba(15,45,56,0.75) 100%);
-  }
-
-  .hero-content {
-    position: relative;
-    text-align: center;
-    color: white;
-    padding: 0 2rem;
-  }
-
-  .hero-eyebrow {
-    font-family: 'Jost', sans-serif;
-    font-weight: 200;
-    letter-spacing: 0.4em;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 1s 0.3s forwards;
-  }
-
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: clamp(3.5rem, 10vw, 7rem);
-    line-height: 1;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.5rem;
-    opacity: 0;
-    animation: fadeUp 1s 0.6s forwards;
-  }
-
-  .hero-title em { font-style: italic; color: var(--gold); }
-
-  .hero-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: clamp(1.1rem, 3vw, 1.6rem);
-    color: rgba(255,255,255,0.75);
-    margin-top: 1rem;
-    opacity: 0;
-    animation: fadeUp 1s 0.9s forwards;
-  }
-
-  .scroll-hint {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    color: rgba(255,255,255,0.5);
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
-    animation: fadeIn 2s 1.5s forwards;
-    opacity: 0;
-  }
-
-  .scroll-hint::after {
-    content: '';
-    width: 1px;
-    height: 50px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
-    animation: scrollLine 1.5s 2s ease-in-out infinite;
-  }
-
-  @keyframes scrollLine { 0%,100%{opacity:.5} 50%{opacity:1} }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-
-  .intro {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 6rem 2rem;
-    text-align: center;
-  }
-
-  .intro-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 2rem;
-  }
-
-  .intro p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-    line-height: 1.8;
-    color: #3a3a3a;
-  }
-
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    max-width: 400px;
-    margin: 0 auto 5rem;
-    padding: 0 2rem;
-  }
-  .divider::before, .divider::after { content:''; flex:1; height:1px; background:var(--gold); opacity:.4; }
-  .divider span { color:var(--gold); font-size:1.2rem; }
-
-  .gallery-section {
-    padding: 0 1.5rem 6rem;
-    max-width: 1300px;
-    margin: 0 auto;
-  }
-
-  .section-header { text-align: center; margin-bottom: 3.5rem; }
-
-  .section-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--sea);
-    margin-bottom: 0.8rem;
-  }
-
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 300;
-    color: var(--deep);
-  }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 280px;
-    gap: 12px;
-  }
-
-  .gallery-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 4px;
-    cursor: pointer;
-    background: linear-gradient(135deg, #d8d0c8, #b8b0a8);
-  }
-
-  .gallery-item.tall { grid-row: span 2; }
-  .gallery-item.wide { grid-column: span 2; }
-
-  .gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
-    display: block;
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
-  }
-
-  .gallery-item img.loaded { opacity: 1; }
-
-  .gallery-item:hover img { transform: scale(1.07); }
-
-  .spinner {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255,255,255,0.5);
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  .spinner-ring {
-    width: 28px;
-    height: 28px;
-    border: 2px solid rgba(255,255,255,0.2);
-    border-top-color: rgba(255,255,255,0.7);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .gallery-item .caption {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(15,45,56,0.88));
-    color: white;
-    padding: 2rem 1.2rem 1rem;
-    opacity: 0;
-    transform: translateY(6px);
-    transition: all 0.35s ease;
-  }
-
-  .caption-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-style: italic;
-    display: block;
-    margin-bottom: 0.2rem;
-  }
-
-  .caption-sub {
-    font-size: 0.62rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    display: block;
-  }
-
-  .gallery-item:hover .caption { opacity: 1; transform: translateY(0); }
-
-  /* LIGHTBOX */
-  .lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(8,20,28,0.97);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .lightbox.active { display: flex; }
-
-  .lightbox img {
-    max-width: 90vw;
-    max-height: 85vh;
-    object-fit: contain;
-    border-radius: 2px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-  }
-
-  .lightbox-caption {
-    color: rgba(255,255,255,0.45);
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-
-  .lightbox-close {
-    position: absolute;
-    top: 1.5rem; right: 2rem;
-    color: rgba(255,255,255,0.5);
-    font-size: 2.5rem;
-    cursor: pointer;
-    font-weight: 100;
-    line-height: 1;
-    transition: color 0.2s;
-    background: none;
-    border: none;
-  }
-  .lightbox-close:hover { color: white; }
-
-  /* QR SECTION */
-  .qr-section {
-    background: var(--deep);
-    padding: 5rem 2rem;
-    text-align: center;
-    color: white;
-  }
-
-  .qr-section .section-label { color: var(--gold); margin-bottom: 1rem; }
-  .qr-section .section-title { color: white; margin-bottom: 0.8rem; }
-
-  .qr-section p {
-    color: rgba(255,255,255,0.45);
-    font-size: 0.85rem;
-    margin-bottom: 2.5rem;
-    letter-spacing: 0.05em;
-  }
-
-  #qrcode {
-    display: inline-block;
-    background: white;
-    padding: 18px;
-    border-radius: 8px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  }
-
-  #qrcode canvas, #qrcode img { display: block; }
-
-  footer {
-    background: #060f15;
-    color: rgba(255,255,255,0.25);
-    text-align: center;
-    padding: 2rem;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-  }
-
-  /* ── PUNTI DI INTERESSE ── */
-  .poi-section {
-    padding: 0 1.5rem 6rem;
-    max-width: 1300px;
-    margin: 0 auto;
-  }
-
-  .poi-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    justify-content: center;
-    margin-bottom: 3rem;
-  }
-
-  .poi-filter {
-    background: none;
-    border: 1px solid rgba(42,107,124,0.3);
-    color: var(--sea);
-    font-family: 'Jost', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    padding: 0.5rem 1.2rem;
-    border-radius: 2rem;
-    cursor: pointer;
-    transition: all 0.25s ease;
-  }
-
-  .poi-filter:hover,
-  .poi-filter.active {
-    background: var(--deep);
-    border-color: var(--deep);
-    color: white;
-  }
-
-  .poi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
-  }
-
-  .poi-card {
-    position: relative;
-    border-radius: 6px;
-    overflow: hidden;
-    cursor: pointer;
-    aspect-ratio: 4/3;
-    background: linear-gradient(135deg, #d0c8c0, #b0a8a0);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .poi-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.18);
-  }
-
-  .poi-card img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
-  .poi-card img.loaded { opacity: 1; }
-
-  /* Overlay base — sempre visibile in basso */
-  .poi-overlay {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(10,25,35,0.92));
-    padding: 2rem 1rem 1rem;
-    transition: padding 0.35s ease;
-  }
-
-  .poi-card:hover .poi-overlay {
-    padding: 2.5rem 1rem 1rem;
-  }
-
-  .poi-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.05rem;
-    color: white;
-    display: block;
-    margin-bottom: 0.2rem;
-  }
-
-  .poi-cat-badge {
-    font-size: 0.58rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-
-  /* Tooltip posizione — appare solo al hover */
-  .poi-location {
-    font-size: 0.65rem;
-    color: rgba(255,255,255,0.6);
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.35s ease, opacity 0.3s ease;
-  }
-
-  .poi-card:hover .poi-location {
-    max-height: 3rem;
-    opacity: 1;
-  }
-
-  .poi-location svg {
-    width: 10px; height: 10px;
-    flex-shrink: 0;
-    fill: var(--gold);
-  }
-
-  .poi-rating {
-    position: absolute;
-    top: 0.8rem; right: 0.8rem;
-    background: rgba(10,25,35,0.75);
-    color: var(--gold);
-    font-size: 0.65rem;
-    font-family: 'Jost', sans-serif;
-    padding: 0.25rem 0.6rem;
-    border-radius: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    backdrop-filter: blur(4px);
-  }
-
-  .poi-card.hidden { display: none; }
-
-  @media (max-width: 480px) {
-    .poi-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .poi-name { font-size: 0.85rem; }
-  }
-
-  @media (max-width: 768px) {
-    .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 200px; }
-  }
-  @media (max-width: 480px) {
-    .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 240px; }
-    .gallery-item.wide, .gallery-item.tall { grid-column: span 1; grid-row: span 1; }
-  }
+:root { --sea:#2a6b7c; --deep:#0f2d38; --gold:#c9a96e; --cream:#faf7f2; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--cream); font-family:'Jost',sans-serif; font-weight:300; overflow-x:hidden; }
+
+/* HERO */
+.hero { position:relative; height:100vh; min-height:600px; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden; background:var(--deep); }
+.hero-bg { position:absolute; inset:0; background-size:cover; background-position:center; opacity:.5; transform:scale(1.05); animation:slowZoom 20s ease-in-out infinite alternate; }
+@keyframes slowZoom { from{transform:scale(1.05)} to{transform:scale(1.12)} }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(15,45,56,.2),rgba(15,45,56,.75)); }
+.hero-content { position:relative; text-align:center; color:white; padding:0 2rem; }
+.hero-eyebrow { font-weight:200; letter-spacing:.4em; font-size:.75rem; text-transform:uppercase; color:var(--gold); margin-bottom:1.5rem; opacity:0; animation:fadeUp 1s .3s forwards; }
+.hero-title { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(3.5rem,10vw,7rem); line-height:1; opacity:0; animation:fadeUp 1s .6s forwards; }
+.hero-title em { font-style:italic; color:var(--gold); }
+.hero-sub { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1.1rem,3vw,1.6rem); color:rgba(255,255,255,.75); margin-top:1rem; opacity:0; animation:fadeUp 1s .9s forwards; }
+.scroll-hint { position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); color:rgba(255,255,255,.5); font-size:.65rem; letter-spacing:.3em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:.6rem; opacity:0; animation:fadeIn 2s 1.5s forwards; }
+.scroll-hint::after { content:''; width:1px; height:50px; background:linear-gradient(to bottom,rgba(255,255,255,.5),transparent); animation:scrollLine 1.5s 2s ease-in-out infinite; }
+@keyframes scrollLine{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* INTRO */
+.intro { max-width:680px; margin:0 auto; padding:6rem 2rem; text-align:center; }
+.intro-label { font-size:.7rem; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); margin-bottom:2rem; }
+.intro p { font-family:'Cormorant Garamond',serif; font-size:clamp(1.2rem,2.5vw,1.5rem); line-height:1.8; color:#3a3a3a; }
+.divider { display:flex; align-items:center; gap:1.5rem; max-width:400px; margin:0 auto 5rem; padding:0 2rem; }
+.divider::before,.divider::after { content:''; flex:1; height:1px; background:var(--gold); opacity:.4; }
+.divider span { color:var(--gold); font-size:1.2rem; }
+
+/* GALLERY */
+.gallery-section { padding:0 1.5rem 6rem; max-width:1300px; margin:0 auto; }
+.section-header { text-align:center; margin-bottom:3.5rem; }
+.section-label { font-size:.7rem; letter-spacing:.35em; text-transform:uppercase; color:var(--sea); margin-bottom:.8rem; }
+.section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,5vw,3.2rem); font-weight:300; color:var(--deep); }
+.gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:280px; gap:12px; }
+.gallery-item { position:relative; overflow:hidden; border-radius:4px; cursor:pointer; background:linear-gradient(135deg,#d8d0c8,#b8b0a8); }
+.gallery-item.tall { grid-row:span 2; }
+.gallery-item.wide { grid-column:span 2; }
+.gallery-item img { width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease,transform .7s cubic-bezier(.25,.46,.45,.94); }
+.gallery-item img.loaded { opacity:1; }
+.gallery-item:hover img { transform:scale(1.07); }
+.spinner { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.5); font-size:.65rem; letter-spacing:.2em; text-transform:uppercase; flex-direction:column; gap:.8rem; }
+.spinner-ring { width:28px; height:28px; border:2px solid rgba(255,255,255,.2); border-top-color:rgba(255,255,255,.7); border-radius:50%; animation:spin .8s linear infinite; }
+@keyframes spin{to{transform:rotate(360deg)}}
+.gallery-item .caption { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent,rgba(15,45,56,.88)); color:white; padding:2rem 1.2rem 1rem; opacity:0; transform:translateY(6px); transition:all .35s ease; }
+.caption-title { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; display:block; margin-bottom:.2rem; }
+.caption-sub { font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); display:block; }
+.gallery-item:hover .caption { opacity:1; transform:translateY(0); }
+
+/* LIGHTBOX */
+.lightbox { display:none; position:fixed; inset:0; background:rgba(8,20,28,.97); z-index:1000; align-items:center; justify-content:center; flex-direction:column; gap:1rem; }
+.lightbox.active { display:flex; }
+.lightbox img { max-width:90vw; max-height:85vh; object-fit:contain; border-radius:2px; }
+.lightbox-caption { color:rgba(255,255,255,.45); font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; }
+.lightbox-close { position:absolute; top:1.5rem; right:2rem; color:rgba(255,255,255,.5); font-size:2.5rem; cursor:pointer; font-weight:100; background:none; border:none; }
+
+/* POI */
+.poi-section { padding:0 1.5rem 6rem; max-width:1300px; margin:0 auto; }
+.poi-filters { display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; margin-bottom:3rem; }
+.poi-filter { background:none; border:1px solid rgba(42,107,124,.3); color:var(--sea); font-family:'Jost',sans-serif; font-size:.72rem; font-weight:300; letter-spacing:.1em; padding:.5rem 1.2rem; border-radius:2rem; cursor:pointer; transition:all .25s ease; }
+.poi-filter:hover,.poi-filter.active { background:var(--deep); border-color:var(--deep); color:white; }
+.poi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; }
+.poi-card { position:relative; border-radius:6px; overflow:hidden; cursor:pointer; aspect-ratio:4/3; background:linear-gradient(135deg,#d0c8c0,#b0a8a0); box-shadow:0 4px 20px rgba(0,0,0,.08); transition:transform .3s ease,box-shadow .3s ease; }
+.poi-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,.18); }
+.poi-card img { width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .5s ease; }
+.poi-card img.loaded { opacity:1; }
+.poi-overlay { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent,rgba(10,25,35,.92)); padding:2rem 1rem 1rem; }
+.poi-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.05rem; color:white; display:block; margin-bottom:.2rem; }
+.poi-cat-badge { font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:.5rem; }
+.poi-location { font-size:.65rem; color:rgba(255,255,255,.6); display:flex; align-items:center; gap:.35rem; max-height:0; overflow:hidden; opacity:0; transition:max-height .35s ease,opacity .3s ease; }
+.poi-card:hover .poi-location { max-height:3rem; opacity:1; }
+.poi-rating { position:absolute; top:.8rem; right:.8rem; background:rgba(10,25,35,.75); color:var(--gold); font-size:.65rem; padding:.25rem .6rem; border-radius:2rem; backdrop-filter:blur(4px); }
+.poi-card.hidden { display:none; }
+
+/* QR */
+.qr-section { background:var(--deep); padding:5rem 2rem; text-align:center; color:white; }
+.qr-section .section-label { color:var(--gold); margin-bottom:1rem; }
+.qr-section .section-title { color:white; margin-bottom:.8rem; }
+.qr-section p { color:rgba(255,255,255,.45); font-size:.85rem; margin-bottom:2.5rem; }
+#qrcode { display:inline-block; background:white; padding:18px; border-radius:8px; }
+#qrcode canvas,#qrcode img { display:block; }
+footer { background:#060f15; color:rgba(255,255,255,.25); text-align:center; padding:2rem; font-size:.7rem; letter-spacing:.12em; }
+
+@media(max-width:768px){ .gallery-grid{grid-template-columns:1fr 1fr;grid-auto-rows:200px} }
+@media(max-width:480px){ .gallery-grid{grid-template-columns:1fr;grid-auto-rows:240px} .gallery-item.wide,.gallery-item.tall{grid-column:span 1;grid-row:span 1} .poi-grid{grid-template-columns:1fr 1fr;gap:10px} }
 </style>
 </head>
 <body>
 
-<section class="hero" id="hero">
+<section class="hero">
   <div class="hero-bg" id="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">Calabria · Costa Tirrenica Cosentina</p>
+    <p class="hero-eyebrow">Calabria - Costa Tirrenica Cosentina</p>
     <h1 class="hero-title">San <em>Lucido</em></h1>
-    <p class="hero-sub">Perla del Tirreno — 56 m sul mare</p>
+    <p class="hero-sub">Perla del Tirreno - 56 m sul mare</p>
   </div>
   <div class="scroll-hint">Scorri</div>
 </section>
 
 <section class="intro">
   <p class="intro-label">Scopri il borgo</p>
-  <p>Nato su uno sperone di roccia della costiera tirrenica, San Lucido domina il mare con una vista mozzafiato. La leggenda di Cilla, la panoramica sul Tirreno e lo Scoglio dalle acque cristalline ne fanno uno dei borghi più suggestivi della Calabria.</p>
+  <p>Nato su uno sperone di roccia della costiera tirrenica, San Lucido domina il mare con una vista mozzafiato. La leggenda di Cilla, la panoramica sul Tirreno e lo Scoglio dalle acque cristalline ne fanno uno dei borghi piu suggestivi della Calabria.</p>
 </section>
 
-<div class="divider"><span>✦</span></div>
+<div class="divider"><span>&#10022;</span></div>
 
 <section class="gallery-section">
   <div class="section-header">
     <p class="section-label">Fotogallery</p>
-    <h2 class="section-title">Scorci & Paesaggi</h2>
+    <h2 class="section-title">Scorci &amp; Paesaggi</h2>
   </div>
-
-  <div class="gallery-grid" id="gallery-grid">
-    <!-- Le foto vengono caricate via JS dalla Wikipedia API -->
-  </div>
-
-  <p style="text-align:center;margin-top:2rem;font-size:0.62rem;color:#bbb;letter-spacing:.1em;">
-    Foto: Wikimedia Commons · Licenza Creative Commons CC BY-SA 4.0
-  </p>
+  <div class="gallery-grid" id="gallery-grid"></div>
+  <p style="text-align:center;margin-top:2rem;font-size:.62rem;color:#bbb;letter-spacing:.1em;">Foto: Wikimedia Commons - Licenza Creative Commons CC BY-SA 4.0</p>
 </section>
 
-<!-- ══ PUNTI DI INTERESSE ══ -->
 <section class="poi-section">
   <div class="section-header">
     <p class="section-label">Esplora il borgo</p>
     <h2 class="section-title">Punti di Interesse</h2>
   </div>
-
   <div class="poi-filters">
     <button class="poi-filter active" data-cat="all">Tutti</button>
-    <button class="poi-filter" data-cat="storia">🏛️ Cultura</button>
-    <button class="poi-filter" data-cat="panorama">🌅 Panoramici</button>
-    <button class="poi-filter" data-cat="ristorante">🐟 Ristoranti</button>
-    <button class="poi-filter" data-cat="bar">☕ Bar & Aperitivi</button>
-    <button class="poi-filter" data-cat="pub">🍺 Pub & Serata</button>
+    <button class="poi-filter" data-cat="storia">Cultura</button>
+    <button class="poi-filter" data-cat="panorama">Panoramici</button>
+    <button class="poi-filter" data-cat="ristorante">Ristoranti</button>
+    <button class="poi-filter" data-cat="bar">Bar &amp; Aperitivi</button>
+    <button class="poi-filter" data-cat="pub">Pub &amp; Serata</button>
   </div>
-
   <div class="poi-grid" id="poi-grid"></div>
 </section>
 
@@ -567,111 +146,59 @@
 </section>
 
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <button class="lightbox-close" onclick="closeLightbox()">x</button>
   <img id="lightbox-img" src="" alt="">
   <span class="lightbox-caption" id="lightbox-caption"></span>
 </div>
 
-<footer>
-  © 2026 · San Lucido, Cosenza, Calabria · Immagini Wikimedia Commons CC BY-SA 4.0
-</footer>
+<footer>2026 - San Lucido, Cosenza, Calabria - Immagini Wikimedia Commons CC BY-SA 4.0</footer>
 
 <script>
-// ── Mete culturali, storiche e attrattive di San Lucido — file da Wikimedia Commons
-const FILES = [
-  // 1 — Paese visto dall'alto (panoramica aerea) — hero anche in griglia
-  { file: "San_Lucido_Cs_-_panoramio.jpg",
-    title: "Il borgo dall'alto",        sub: "Rocca Nicetina sul Tirreno",  tall: true },
-
-  // 2 — Centro storico: gradinate Reddra
-  { file: "Centro_storico_-_Reddra_e_Silica_-_San_Lucido_Cs.JPG",
-    title: "Centro Storico",            sub: "La Reddra e la Silica"                  },
-
-  // 3 — Centro storico: variante scorcio
-  { file: "Centro_storico_-_Reddra_e_Silica_--_San_Lucido_Cs.JPG",
-    title: "Vicoli del Centro",         sub: "Scorci pittoreschi"                     },
-
-  // 4 — Belvedere / Lungomare Alto: panoramica sul mare (wide per impatto visivo)
-  { file: "Centro_storico_-_Reddra_e_Silica_---_San_Lucido_Cs.JPG",
-    title: "Belvedere",                 sub: "Terrazza sul Mar Tirreno",    wide: true },
-
-  // 5 — Castello Ruffo: monumento storico principale
-  { file: "Statua_della_Madonna_Immacolata_davanti_alla_Chiesa_di_San_Giovanni_Battista_a_San_Lucido.jpg",
-    title: "Statua della Madonna",      sub: "Piazza San Giovanni Battista"           },
-
-  // 6 — Chiesa San Giovanni Battista (patrono)
-  { file: "Chiesa_San_Giovanni_Battista_San_Lucido.JPG",
-    title: "Chiesa S. Giovanni Battista", sub: "Santo patrono del borgo",   tall: true },
-
-  // 7 — SS. Annunziata esterna
-  { file: "Chiesa_della_Santissima_Annunziata-San_Lucido_Cs.JPG",
-    title: "Chiesa SS. Annunziata",     sub: "Arte sacra del XVII sec."               },
-
-  // 8 — SS. Annunziata dettaglio facciata
-  { file: "Chiesa_della_SS._Annunziata_3.jpg",
-    title: "SS. Annunziata",            sub: "Dettaglio architettonico"               },
-
-  // 9 — Centro storico ulteriore scorcio
-  { file: "Centro_storico_-_Reddra_e_Silica_San_Lucido_Cs.JPG",
-    title: "Centro Storico",            sub: "Gradinate in tufo bianco"               },
+var FILES = [
+  { file:"San_Lucido_Cs_-_panoramio.jpg", title:"Il borgo", sub:"Rocca Nicetina sul Tirreno", tall:true },
+  { file:"Centro_storico_-_Reddra_e_Silica_-_San_Lucido_Cs.JPG", title:"Centro Storico", sub:"La Reddra e la Silica" },
+  { file:"Centro_storico_-_Reddra_e_Silica_--_San_Lucido_Cs.JPG", title:"Vicoli del Centro", sub:"Scorci pittoreschi" },
+  { file:"Centro_storico_-_Reddra_e_Silica_---_San_Lucido_Cs.JPG", title:"Belvedere", sub:"Terrazza sul Mar Tirreno", wide:true },
+  { file:"Statua_della_Madonna_Immacolata_davanti_alla_Chiesa_di_San_Giovanni_Battista_a_San_Lucido.jpg", title:"Statua della Madonna", sub:"Piazza San Giovanni Battista" },
+  { file:"Chiesa_San_Giovanni_Battista_San_Lucido.JPG", title:"Chiesa S. Giovanni Battista", sub:"Santo patrono del borgo", tall:true },
+  { file:"Chiesa_della_Santissima_Annunziata-San_Lucido_Cs.JPG", title:"Chiesa SS. Annunziata", sub:"Arte sacra del XVII sec." },
+  { file:"Chiesa_della_SS._Annunziata_3.jpg", title:"SS. Annunziata", sub:"Dettaglio architettonico" },
+  { file:"Centro_storico_-_Reddra_e_Silica_San_Lucido_Cs.JPG", title:"Centro Storico", sub:"Gradinate in tufo bianco" }
 ];
 
-const HERO_FILE = "San_Lucido_Cs_-_panoramio.jpg";
+var HERO_FILE = "San_Lucido_Cs_-_panoramio.jpg";
 
-// Wikipedia image API con CORS aperto
-async function getImageUrl(filename, width = 800) {
-  const url = `https://en.wikipedia.org/w/api.php?action=query&titles=File:${encodeURIComponent(filename)}&prop=imageinfo&iiprop=url&iiurlwidth=${width}&format=json&origin=*`;
-  const r = await fetch(url);
-  const d = await r.json();
-  const pages = d.query.pages;
-  const page  = Object.values(pages)[0];
-  return page?.imageinfo?.[0]?.thumburl || null;
+function getImageUrl(filename, width) {
+  var w = width || 800;
+  var url = "https://en.wikipedia.org/w/api.php?action=query&titles=File:" + encodeURIComponent(filename) + "&prop=imageinfo&iiprop=url&iiurlwidth=" + w + "&format=json&origin=*";
+  return fetch(url).then(function(r){ return r.json(); }).then(function(d){
+    var pages = d.query.pages;
+    var page = Object.values(pages)[0];
+    return (page && page.imageinfo && page.imageinfo[0]) ? page.imageinfo[0].thumburl : null;
+  });
 }
 
-async function buildGallery() {
-  const grid = document.getElementById("gallery-grid");
-
-  // Hero
-  getImageUrl(HERO_FILE, 1600).then(url => {
-    if (url) document.getElementById("hero-bg").style.backgroundImage = `url('${url}')`;
+function buildGallery() {
+  var grid = document.getElementById("gallery-grid");
+  getImageUrl(HERO_FILE, 1600).then(function(url){
+    if(url) document.getElementById("hero-bg").style.backgroundImage = "url('" + url + "')";
   });
-
-  // Celle
-  FILES.forEach((item, i) => {
-    const cell = document.createElement("div");
+  FILES.forEach(function(item){
+    var cell = document.createElement("div");
     cell.className = "gallery-item" + (item.tall ? " tall" : "") + (item.wide ? " wide" : "");
-
-    cell.innerHTML = `
-      <div class="spinner"><div class="spinner-ring"></div><span>Caricamento</span></div>
-      <img alt="${item.title}">
-      <div class="caption">
-        <span class="caption-title">${item.title}</span>
-        <span class="caption-sub">${item.sub}</span>
-      </div>`;
-
+    cell.innerHTML = '<div class="spinner"><div class="spinner-ring"></div><span>Caricamento</span></div><img alt="' + item.title + '"><div class="caption"><span class="caption-title">' + item.title + '</span><span class="caption-sub">' + item.sub + '</span></div>';
     grid.appendChild(cell);
-
-    const img = cell.querySelector("img");
-    const spinner = cell.querySelector(".spinner");
-
-    getImageUrl(item.file, item.wide ? 1280 : 800).then(url => {
-      if (url) {
-        img.src = url;
-        img.onload = () => {
-          img.classList.add("loaded");
-          spinner.style.display = "none";
-        };
-        img.onerror = () => { spinner.innerHTML = "<span style='font-size:.6rem;color:#aaa'>Foto non disponibile</span>"; };
-      } else {
-        spinner.innerHTML = "<span style='font-size:.6rem;color:#aaa'>Foto non disponibile</span>";
-      }
+    var img = cell.querySelector("img");
+    var spinner = cell.querySelector(".spinner");
+    getImageUrl(item.file, item.wide ? 1280 : 800).then(function(url){
+      if(url){ img.src = url; img.onload = function(){ img.classList.add("loaded"); spinner.style.display="none"; }; img.onerror = function(){ spinner.innerHTML="<span>Non disponibile</span>"; }; }
+      else { spinner.innerHTML = "<span>Non disponibile</span>"; }
     });
-
-    cell.addEventListener("click", () => {
-      getImageUrl(item.file, 1280).then(url => {
-        if (!url) return;
+    cell.addEventListener("click", function(){
+      getImageUrl(item.file, 1280).then(function(url){
+        if(!url) return;
         document.getElementById("lightbox-img").src = url;
-        document.getElementById("lightbox-caption").textContent = item.title + " · " + item.sub;
+        document.getElementById("lightbox-caption").textContent = item.title + " - " + item.sub;
         document.getElementById("lightbox").classList.add("active");
         document.body.style.overflow = "hidden";
       });
@@ -680,133 +207,67 @@ async function buildGallery() {
 }
 
 function closeLightbox(e) {
-  if (e && e.target === document.getElementById("lightbox-img")) return;
+  if(e && e.target === document.getElementById("lightbox-img")) return;
   document.getElementById("lightbox").classList.remove("active");
   document.body.style.overflow = "";
 }
 
-document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
+document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeLightbox(); });
 
-// QR CODE
-const pageUrl = window.location.href.split("?")[0];
-new QRCode(document.getElementById("qrcode"), {
-  text: pageUrl,
-  width: 200, height: 200,
-  colorDark: "#0f2d38",
-  colorLight: "#ffffff",
-  correctLevel: QRCode.CorrectLevel.H
-});
-
-buildGallery();
-
-// ── PUNTI DI INTERESSE ──
-const POIS = [
-  // CULTURA & STORIA
-  { name: "Statua di Cilla", cat: "storia", badge: "🏛️ Cultura & Storia", rating: 4.6,
-    address: "Via Roma, 3 — San Lucido", mapsUrl: "https://maps.google.com/?cid=15285938023357350799",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZNEzJD2ixK2Y8K0f8w0Yq4omSvMurJN0u-iHnAewS2MJxArNZUEV3_uXzv3VojcEYUQOnZ1zF52_rRPGM5fBUEKemDtaOueD8sf9S1PjjntdI-6D4Wz2OB6yPRcXOWgIz9wvz_MsRHpVNtR=s800-w800-h600" },
-  { name: "Castello Ruffo", cat: "storia", badge: "🏛️ Cultura & Storia", rating: 4.8,
-    address: "Via Roma — San Lucido", mapsUrl: "https://maps.google.com/?cid=9310496428041668241",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZNXeUBORiWfW273ZV-2p79I5MDnqQT13TRkqwaFxW9nUBj0vLkHpHXZXS-Ty3pdsUN5AWZBVjdvfWOYq9ruEqddbvb16D8IuQlA545PF0QBy5i71zuNF2xxpTK6r8bZALgTxct1T3Se73y9FhM=s800-w800-h600" },
-  { name: "Eremo S. Maria di Monte Persano", cat: "storia", badge: "🏛️ Cultura & Storia", rating: 4.4,
-    address: "Contrada Monte Persano — San Lucido", mapsUrl: "https://maps.google.com/?cid=7088257452852657335",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZO0ko_yFJRCHiUyUOsDiLM8LnbXa2TXgPGq-7l8EOwwRYH_q9sEl0gvm1XYZtYRylpCWzbO8F8X7A4GC8YCWObDK2LQk6MQqKhh3MYbWh08wtK0qE-zwVQ3wlspWqKbPXfrUQTGsL_l_GMEJMw=s800-w800-h600" },
-
-  // PANORAMICI
-  { name: "La Panoramica", cat: "panorama", badge: "🌅 Belvedere", rating: 4.8,
-    address: "Via Garibaldi — San Lucido", mapsUrl: "https://maps.google.com/?cid=4338893397647673361",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZMxlTfObNtYrE9n8NpiLTz3KKRmrxAieTeBJdN0xb6Ufq32B0yr-Rl1pWZdlAJLgE7m_8lUB6dEwJR163Kpnw7lToZD6KNgip1BmWFwhq0mPs2pSa0MK6fZj-8fXFH430HPXIdo3jhar6lSr8s=s800-w800-h600" },
-  { name: "Punto Panoramico", cat: "panorama", badge: "🌅 Belvedere", rating: 5.0,
-    address: "Via Roma, 4 — San Lucido", mapsUrl: "https://maps.google.com/?cid=15259338876061330637",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZPsoDbMhNrprFtlxdcG4lK1Ztj06o7Xw1ADZIftM4XuoEGzQR8-rTUcuoKdzXMyFtAhEC6ALXX_WTQlg5sPJs9X6VpX-KWTYvxaSmqDpZJEH33N3jr288PdwKm28gLDorfdmSSVdyS-yVcqFw=s800-w800-h600" },
-  { name: "Croce della Crocetta", cat: "panorama", badge: "🌅 Belvedere", rating: 4.8,
-    address: "SS107 — Paola/Cosenza (sopra San Lucido)", mapsUrl: "https://maps.google.com/?cid=11201899320295369160",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZMtdN4_sRPuJvKtApjb-o-1iRvBq5QfffqFnPr4tna1u34m_0cgUx8sgXxY1FEAIJvq7IL07X7ISCwlIHqGhBa_lAAz2jOKXfYlYPKYJaATlZt8s69STOjTL9MYwtITA4tVRR8H1BCCCj1vjg=s800-w800-h600" },
-  { name: "Lungomare San Lucido", cat: "panorama", badge: "🌅 Belvedere", rating: 4.5,
-    address: "Via Lungomare Nord — San Lucido", mapsUrl: "https://maps.google.com/?cid=12987112175899287970",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZNup3ATMchCF5rt_r7f9jKxKoNuN7MXpy9ZTw_3-ekCERIzGnmssjM8HoR0ebZ2kmkYr8Jcd6wmzm6PfM2vFBycXMSuGNU8tGRTtPo_1gmuI4RJz6KDjPBRlwXoHqWmmmyNe8zEqaiyVPhxiCBGN1Fk=s800-w800-h600" },
-
-  // RISTORANTI
-  { name: "Tema Sas", cat: "ristorante", badge: "🐟 Ristorante", rating: 4.7,
-    address: "Via Marina Taverna, 29 — San Lucido", mapsUrl: "https://maps.google.com/?cid=14218437162501109698",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZPBPapA9YAJxxOZWXmst7qSOG7JuUyHLPDGAhqbrrr6Oj0-JijVhfiskX5ShlSxgekLIt5DwU0gKK-2sLoDry8FZq2DWK_n_f5CzRa2oErDGa8G0Bs1davkyi3LOnjhvA5f08Ri4-JhSVpZmfk=s800-w800-h600" },
-  { name: "Trattoria Sasà", cat: "ristorante", badge: "🐟 Ristorante", rating: 4.7,
-    address: "Piazza San Salvatore, 10 — San Lucido", mapsUrl: "https://maps.google.com/?cid=2231667727700187031",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZNICs4f5TfNcqDJ1M2pgF2lBfo73Mm0pH1TVEpZFR3TAkwdibKFUaZbAVSadslKKFZJzCaRNVhdcLJPqhMcLGcJI-ex_8arhmisPT296o6yYwM6ls1JMMV0eBbcKaqolPXiHafLhQ9Twlwxc6AK6A5iBA=s800-w800-h600" },
-  { name: "Ristorante Pacalè", cat: "ristorante", badge: "🐟 Ristorante", rating: 4.6,
-    address: "Via Libertini — San Lucido", mapsUrl: "https://maps.google.com/?cid=9679654212068422216",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZOi1Ku6xp_WiLjf8LKB6fcpp_YEHxClI-F8pkpekvzrMIrtWAx2fgZVjgWqbKEZH3n95wpN0tBBwkx43FJdahTcBJHE8kr8LrkDQ8CokU1clk4m8JP5Nmo-jqWRRD4Sddmy-2AdJ6mIa1x1DUyxVXa_=s800-w800-h600" },
-  { name: "Restaurant Dragut", cat: "ristorante", badge: "🐟 Ristorante", rating: 4.3,
-    address: "Via Marina Taverna, 26 — San Lucido", mapsUrl: "https://maps.google.com/?cid=15328107762059311612",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZMLuH9h5Xg-J5kYomPWxzPvp0xv41WjiUvGAIdcvwlSLMLP8fR9w_7OOK84fR4-jwNUfpZJbw2bwMdYP0R0kt6XtrbLhzcyfcZxtEUtai9tjrB_YtNwba6OO8Vilwi2nFIVt_Z7zsnwDlilag=s800-w800-h600" },
-  { name: "Borgo Rosso di Sera", cat: "ristorante", badge: "🐟 Ristorante & Resort", rating: 4.6,
-    address: "Contrada Puppa — San Lucido", mapsUrl: "https://maps.google.com/?cid=13728818899650898420",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZOmCP5RxKmqrJHAEvd_MZxWxHrHc8gTVOqtL668XAztvk3-SWOvYSFjOrDMLpstDF5pPgMJgS_-WoolIqhbqilo_cIq9e-oU8It11v2J_VQdeuCSY1iTU5eKv662mgsgf9wUwcxcFzP3jyWTt8=s800-w800-h600" },
-
-  // BAR & APERITIVI
-  { name: "Calipso", cat: "bar", badge: "☕ Bar & Aperitivo", rating: 4.7,
-    address: "Via Lungomare Sud, 23 — San Lucido", mapsUrl: "https://maps.google.com/?cid=6341918097462087283",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZOgcJZi19bil6HjCin6wB5rzLQRcafaTQ_UP8agoEL-tgI-Zergjy8Gytfxh2Ctip6GYoDt4VBAW6_-Hegu_dn2zmUretfNvTu4oFE7rX1tiF-xAS8pLcipNtxR_JbaLxtlyQdBFRVSbcOUtQ=s800-w800-h600" },
-  { name: "GAFIUBAR", cat: "bar", badge: "☕ Bar & Aperitivo", rating: 4.4,
-    address: "Via Vittorio Emanuele, 3 — San Lucido", mapsUrl: "https://maps.google.com/?cid=4069681265405058184",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZP7FlTMjj0sxND3j3kXV3PwH2n3gVcLznbykPJjevQuOVubhokZZ0kujUoxj0NU4l0EVkUDKqpEu4fegPt_e7V2eyVzLlMgNPcxsSIPGTfw2emGg2a6C3oH0QPr_paoAHvX46HJI5FErZqhlzJCj5Gl=s800-w800-h600" },
-  { name: "Vida Loca Cafè", cat: "bar", badge: "☕ Bar & Aperitivo", rating: 4.3,
-    address: "Piazza Giacomo Matteotti, 4 — San Lucido", mapsUrl: "https://maps.google.com/?cid=17343481617358514448",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZOmKLCVgz14Tc1EgELTSF_Q4D5L3tPSHwcEPmlcSSjgoTVsEEUipKNF1Y_--t9UY1uPwvRYwnvbnYFfsCbybOChON2KttLJJYPdzz1wBXOGxTJOSyj-o3pChb-tfuB9r2QZO9oiB-i4SeBfEzA=s800-w800-h600" },
-
-  // PUB & SERATA
-  { name: "Break Time Risto-Pub", cat: "pub", badge: "🍺 Pub & Serata", rating: 4.7,
-    address: "Via Annunziata, 44 — San Lucido", mapsUrl: "https://maps.google.com/?cid=8944547059285168327",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZPwQhsF7NRZCIzxNyxBZ6O25jqTaw-uUudxdpGQOMYUkKOnpocjuP8Fy-ccDhsihF3eBq8mOviKq5lJsUo5gOidTvUi717RRc9rkFqPDbZ514W3MwEAoR_t6myVR7Bxdy6xuEFLlFKG-U2TLw=s800-w800-h600" },
-  { name: "Donna Vienna Pub", cat: "pub", badge: "🍺 Pub & Serata", rating: 4.4,
-    address: "Corso Giuseppe Garibaldi — San Lucido", mapsUrl: "https://maps.google.com/?cid=175451544629937684",
-    photo: "https://lh3.googleusercontent.com/place-photos/AJRVUZPl9jaxI4WpI5YpSsFaLxtnStRVxq0CmBFVvsa1qiEDLq_HH8g6MFve21GJtZVa1hqc_yQTSVwlKY_EQ2AGWdW9WSV37EuY4LLh17uJaGn-YV0cZUbxHyVslDxTSDNYVwQ7LYDhU74ncS8OWRc=s800-w800-h600" },
+var POIS = [
+  { name:"Statua di Cilla", cat:"storia", badge:"Cultura e Storia", rating:4.6, address:"Via Roma, 3 - San Lucido", mapsUrl:"https://maps.google.com/?cid=15285938023357350799", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZNEzJD2ixK2Y8K0f8w0Yq4omSvMurJN0u-iHnAewS2MJxArNZUEV3_uXzv3VojcEYUQOnZ1zF52_rRPGM5fBUEKemDtaOueD8sf9S1PjjntdI-6D4Wz2OB6yPRcXOWgIz9wvz_MsRHpVNtR=s800-w800-h600" },
+  { name:"Castello Ruffo", cat:"storia", badge:"Cultura e Storia", rating:4.8, address:"Via Roma - San Lucido", mapsUrl:"https://maps.google.com/?cid=9310496428041668241", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZNXeUBORiWfW273ZV-2p79I5MDnqQT13TRkqwaFxW9nUBj0vLkHpHXZXS-Ty3pdsUN5AWZBVjdvfWOYq9ruEqddbvb16D8IuQlA545PF0QBy5i71zuNF2xxpTK6r8bZALgTxct1T3Se73y9FhM=s800-w800-h600" },
+  { name:"Eremo Monte Persano", cat:"storia", badge:"Cultura e Storia", rating:4.4, address:"Contrada Monte Persano - San Lucido", mapsUrl:"https://maps.google.com/?cid=7088257452852657335", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZO0ko_yFJRCHiUyUOsDiLM8LnbXa2TXgPGq-7l8EOwwRYH_q9sEl0gvm1XYZtYRylpCWzbO8F8X7A4GC8YCWObDK2LQk6MQqKhh3MYbWh08wtK0qE-zwVQ3wlspWqKbPXfrUQTGsL_l_GMEJMw=s800-w800-h600" },
+  { name:"La Panoramica", cat:"panorama", badge:"Belvedere", rating:4.8, address:"Via Garibaldi - San Lucido", mapsUrl:"https://maps.google.com/?cid=4338893397647673361", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZMxlTfObNtYrE9n8NpiLTz3KKRmrxAieTeBJdN0xb6Ufq32B0yr-Rl1pWZdlAJLgE7m_8lUB6dEwJR163Kpnw7lToZD6KNgip1BmWFwhq0mPs2pSa0MK6fZj-8fXFH430HPXIdo3jhar6lSr8s=s800-w800-h600" },
+  { name:"Punto Panoramico", cat:"panorama", badge:"Belvedere", rating:5.0, address:"Via Roma, 4 - San Lucido", mapsUrl:"https://maps.google.com/?cid=15259338876061330637", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZPsoDbMhNrprFtlxdcG4lK1Ztj06o7Xw1ADZIftM4XuoEGzQR8-rTUcuoKdzXMyFtAhEC6ALXX_WTQlg5sPJs9X6VpX-KWTYvxaSmqDpZJEH33N3jr288PdwKm28gLDorfdmSSVdyS-yVcqFw=s800-w800-h600" },
+  { name:"Croce della Crocetta", cat:"panorama", badge:"Belvedere", rating:4.8, address:"SS107 - Paola/Cosenza", mapsUrl:"https://maps.google.com/?cid=11201899320295369160", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZMtdN4_sRPuJvKtApjb-o-1iRvBq5QfffqFnPr4tna1u34m_0cgUx8sgXxY1FEAIJvq7IL07X7ISCwlIHqGhBa_lAAz2jOKXfYlYPKYJaATlZt8s69STOjTL9MYwtITA4tVRR8H1BCCCj1vjg=s800-w800-h600" },
+  { name:"Lungomare San Lucido", cat:"panorama", badge:"Belvedere", rating:4.5, address:"Via Lungomare Nord - San Lucido", mapsUrl:"https://maps.google.com/?cid=12987112175899287970", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZNup3ATMchCF5rt_r7f9jKxKoNuN7MXpy9ZTw_3-ekCERIzGnmssjM8HoR0ebZ2kmkYr8Jcd6wmzm6PfM2vFBycXMSuGNU8tGRTtPo_1gmuI4RJz6KDjPBRlwXoHqWmmmyNe8zEqaiyVPhxiCBGN1Fk=s800-w800-h600" },
+  { name:"Tema Sas", cat:"ristorante", badge:"Ristorante", rating:4.7, address:"Via Marina Taverna, 29 - San Lucido", mapsUrl:"https://maps.google.com/?cid=14218437162501109698", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZPBPapA9YAJxxOZWXmst7qSOG7JuUyHLPDGAhqbrrr6Oj0-JijVhfiskX5ShlSxgekLIt5DwU0gKK-2sLoDry8FZq2DWK_n_f5CzRa2oErDGa8G0Bs1davkyi3LOnjhvA5f08Ri4-JhSVpZmfk=s800-w800-h600" },
+  { name:"Trattoria Sasa", cat:"ristorante", badge:"Ristorante", rating:4.7, address:"Piazza San Salvatore, 10 - San Lucido", mapsUrl:"https://maps.google.com/?cid=2231667727700187031", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZNICs4f5TfNcqDJ1M2pgF2lBfo73Mm0pH1TVEpZFR3TAkwdibKFUaZbAVSadslKKFZJzCaRNVhdcLJPqhMcLGcJI-ex_8arhmisPT296o6yYwM6ls1JMMV0eBbcKaqolPXiHafLhQ9Twlwxc6AK6A5iBA=s800-w800-h600" },
+  { name:"Ristorante Pacale", cat:"ristorante", badge:"Ristorante", rating:4.6, address:"Via Libertini - San Lucido", mapsUrl:"https://maps.google.com/?cid=9679654212068422216", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZOi1Ku6xp_WiLjf8LKB6fcpp_YEHxClI-F8pkpekvzrMIrtWAx2fgZVjgWqbKEZH3n95wpN0tBBwkx43FJdahTcBJHE8kr8LrkDQ8CokU1clk4m8JP5Nmo-jqWRRD4Sddmy-2AdJ6mIa1x1DUyxVXa_=s800-w800-h600" },
+  { name:"Restaurant Dragut", cat:"ristorante", badge:"Ristorante", rating:4.3, address:"Via Marina Taverna, 26 - San Lucido", mapsUrl:"https://maps.google.com/?cid=15328107762059311612", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZMLuH9h5Xg-J5kYomPWxzPvp0xv41WjiUvGAIdcvwlSLMLP8fR9w_7OOK84fR4-jwNUfpZJbw2bwMdYP0R0kt6XtrbLhzcyfcZxtEUtai9tjrB_YtNwba6OO8Vilwi2nFIVt_Z7zsnwDlilag=s800-w800-h600" },
+  { name:"Borgo Rosso di Sera", cat:"ristorante", badge:"Ristorante e Resort", rating:4.6, address:"Contrada Puppa - San Lucido", mapsUrl:"https://maps.google.com/?cid=13728818899650898420", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZOmCP5RxKmqrJHAEvd_MZxWxHrHc8gTVOqtL668XAztvk3-SWOvYSFjOrDMLpstDF5pPgMJgS_-WoolIqhbqilo_cIq9e-oU8It11v2J_VQdeuCSY1iTU5eKv662mgsgf9wUwcxcFzP3jyWTt8=s800-w800-h600" },
+  { name:"Calipso", cat:"bar", badge:"Bar e Aperitivo", rating:4.7, address:"Via Lungomare Sud, 23 - San Lucido", mapsUrl:"https://maps.google.com/?cid=6341918097462087283", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZOgcJZi19bil6HjCin6wB5rzLQRcafaTQ_UP8agoEL-tgI-Zergjy8Gytfxh2Ctip6GYoDt4VBAW6_-Hegu_dn2zmUretfNvTu4oFE7rX1tiF-xAS8pLcipNtxR_JbaLxtlyQdBFRVSbcOUtQ=s800-w800-h600" },
+  { name:"GAFIUBAR", cat:"bar", badge:"Bar e Aperitivo", rating:4.4, address:"Via Vittorio Emanuele, 3 - San Lucido", mapsUrl:"https://maps.google.com/?cid=4069681265405058184", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZP7FlTMjj0sxND3j3kXV3PwH2n3gVcLznbykPJjevQuOVubhokZZ0kujUoxj0NU4l0EVkUDKqpEu4fegPt_e7V2eyVzLlMgNPcxsSIPGTfw2emGg2a6C3oH0QPr_paoAHvX46HJI5FErZqhlzJCj5Gl=s800-w800-h600" },
+  { name:"Vida Loca Cafe", cat:"bar", badge:"Bar e Aperitivo", rating:4.3, address:"Piazza Giacomo Matteotti, 4 - San Lucido", mapsUrl:"https://maps.google.com/?cid=17343481617358514448", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZOmKLCVgz14Tc1EgELTSF_Q4D5L3tPSHwcEPmlcSSjgoTVsEEUipKNF1Y_--t9UY1uPwvRYwnvbnYFfsCbybOChON2KttLJJYPdzz1wBXOGxTJOSyj-o3pChb-tfuB9r2QZO9oiB-i4SeBfEzA=s800-w800-h600" },
+  { name:"Break Time Risto-Pub", cat:"pub", badge:"Pub e Serata", rating:4.7, address:"Via Annunziata, 44 - San Lucido", mapsUrl:"https://maps.google.com/?cid=8944547059285168327", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZPwQhsF7NRZCIzxNyxBZ6O25jqTaw-uUudxdpGQOMYUkKOnpocjuP8Fy-ccDhsihF3eBq8mOviKq5lJsUo5gOidTvUi717RRc9rkFqPDbZ514W3MwEAoR_t6myVR7Bxdy6xuEFLlFKG-U2TLw=s800-w800-h600" },
+  { name:"Donna Vienna Pub", cat:"pub", badge:"Pub e Serata", rating:4.4, address:"Corso Giuseppe Garibaldi - San Lucido", mapsUrl:"https://maps.google.com/?cid=175451544629937684", photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZPl9jaxI4WpI5YpSsFaLxtnStRVxq0CmBFVvsa1qiEDLq_HH8g6MFve21GJtZVa1hqc_yQTSVwlKY_EQ2AGWdW9WSV37EuY4LLh17uJaGn-YV0cZUbxHyVslDxTSDNYVwQ7LYDhU74ncS8OWRc=s800-w800-h600" }
 ];
 
 function buildPOI() {
-  const grid = document.getElementById("poi-grid");
-
-  POIS.forEach(p => {
-    const card = document.createElement("div");
+  var grid = document.getElementById("poi-grid");
+  POIS.forEach(function(p){
+    var card = document.createElement("div");
     card.className = "poi-card";
     card.dataset.cat = p.cat;
-
-    const stars = "★".repeat(Math.round(p.rating)) + "☆".repeat(5 - Math.round(p.rating));
-
-    card.innerHTML = `
-      <img src="${p.photo}" alt="${p.name}" loading="lazy">
-      <div class="poi-rating">★ ${p.rating}</div>
-      <div class="poi-overlay">
-        <span class="poi-cat-badge">${p.badge}</span>
-        <span class="poi-name">${p.name}</span>
-        <div class="poi-location">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          ${p.address}
-        </div>
-      </div>`;
-
-    const img = card.querySelector("img");
-    img.onload = () => img.classList.add("loaded");
-    img.onerror = () => { img.style.display = "none"; };
-
-    card.addEventListener("click", () => window.open(p.mapsUrl, "_blank"));
-
+    card.innerHTML = '<img src="' + p.photo + '" alt="' + p.name + '" loading="lazy"><div class="poi-rating">&#9733; ' + p.rating + '</div><div class="poi-overlay"><span class="poi-cat-badge">' + p.badge + '</span><span class="poi-name">' + p.name + '</span><div class="poi-location">&#128205; ' + p.address + '</div></div>';
+    var img = card.querySelector("img");
+    img.onload = function(){ img.classList.add("loaded"); };
+    img.onerror = function(){ img.style.display="none"; };
+    card.addEventListener("click", function(){ window.open(p.mapsUrl, "_blank"); });
     grid.appendChild(card);
   });
 
-  // Filtri
-  document.querySelectorAll(".poi-filter").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".poi-filter").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll(".poi-filter").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll(".poi-filter").forEach(function(b){ b.classList.remove("active"); });
       btn.classList.add("active");
-      const cat = btn.dataset.cat;
-      document.querySelectorAll(".poi-card").forEach(card => {
+      var cat = btn.dataset.cat;
+      document.querySelectorAll(".poi-card").forEach(function(card){
         card.classList.toggle("hidden", cat !== "all" && card.dataset.cat !== cat);
       });
     });
   });
 }
 
+var pageUrl = window.location.href.split("?")[0];
+new QRCode(document.getElementById("qrcode"), {
+  text: pageUrl, width:200, height:200,
+  colorDark:"#0f2d38", colorLight:"#ffffff",
+  correctLevel: QRCode.CorrectLevel.H
+});
+
+buildGallery();
 buildPOI();
 </script>
 </body>
