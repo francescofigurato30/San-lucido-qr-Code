@@ -1,8 +1,3 @@
-Ecco il tuo file `index.html` completo, unificato e pronto all'uso. Ho inserito la sezione **Numeri di Emergenza** e il **Calendario delle Feste/Sagre** automatico integrando lo stile e le variabili cromatiche già presenti (come `--gold`, `--deep` e `--sea`), così da mantenere il design elegante del tuo portale.
-
-Copia l'intero blocco di codice qui sotto e sostituiscilo completamente al tuo file attuale:
-
-```html
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -103,20 +98,21 @@ footer { background:#060f15; color:rgba(255,255,255,.25); text-align:center; pad
 <section class="poi-section">
   <div class="section-header">
     <p class="section-label">Esplora il borgo</p>
-    <h2 class="section-title">I Nostri Menù & Servizi</h2>
+    <h2 class="section-title">I Nostri Menù &amp; Servizi</h2>
   </div>
   <div class="poi-filters">
     <button class="poi-filter active" data-cat="all">Tutti</button>
     <button class="poi-filter" data-cat="storia">Cultura</button>
     <button class="poi-filter" data-cat="panorama">Panoramici</button>
     <button class="poi-filter" data-cat="ristorante">Ristoranti</button>
-    <button class="poi-filter" data-cat="bar">Bar & Aperitivi</button>
-    <button class="poi-filter" data-cat="pub">Pub & Serata</button>
+    <button class="poi-filter" data-cat="bar">Bar &amp; Aperitivi</button>
+    <button class="poi-filter" data-cat="pub">Pub &amp; Serata</button>
     <button class="poi-filter" data-cat="dormire">Dove Dormire?</button>
   </div>
   <div class="poi-grid" id="poi-grid"></div>
 </section>
 
+<!-- SEZIONE: CALENDARIO FESTE E SAGRE -->
 <section class="events-section" style="padding: 5rem 1.5rem; background: #f4eee4; border-top: 1px solid rgba(0,0,0,0.05);">
   <div style="max-width:1300px; margin:0 auto;">
     <div class="section-header" style="text-align:center; margin-bottom:3.5rem;">
@@ -125,20 +121,27 @@ footer { background:#060f15; color:rgba(255,255,255,.25); text-align:center; pad
       <p style="font-size:0.75rem; color:#666; margin-top:0.6rem; font-family:'Jost',sans-serif;">Ordinamento automatico: il mese corrente viene mostrato per primo ed evidenziato.</p>
     </div>
     <div id="events-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
-      </div>
+      <!-- Popolato dinamicamente da JavaScript -->
+    </div>
   </div>
 </section>
 
+<!-- SEZIONE: NUMERI DI EMERGENZA -->
 <section class="services-section" style="padding: 5rem 1.5rem; max-width: 1300px; margin: 0 auto;">
   <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
     <p class="section-label" style="font-size:.7rem; letter-spacing:.35em; text-transform:uppercase; color:var(--sea); margin-bottom:.8rem;">Assistenza al cittadino</p>
     <h2 class="section-title" style="font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,5vw,3.2rem); font-weight:300; color:var(--deep);">Numeri Utili &amp; Emergenza</h2>
   </div>
-  <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+  <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
     <div style="background: white; padding: 1.5rem; border-radius: 6px; box-shadow: 0 4px 20px rgba(0,0,0,.04); border-left: 4px solid #d9534f;">
       <h3 style="font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep); margin-bottom: 0.4rem; font-weight:400;">Emergenze Sanitarie</h3>
       <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: bold; color: #d9534f; margin-bottom: 0.2rem;">118</p>
       <span style="font-size: 0.72rem; color: #666; display: block;">Guardia Medica S. Lucido: 0982 81243</span>
+    </div>
+    <div style="background: white; padding: 1.5rem; border-radius: 6px; box-shadow: 0 4px 20px rgba(0,0,0,.04); border-left: 4px solid #0275d8;">
+      <h3 style="font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep); margin-bottom: 0.4rem; font-weight:400;">Emergenze in Mare</h3>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: bold; color: #0275d8; margin-bottom: 0.2rem;">1530</p>
+      <span style="font-size: 0.72rem; color: #666; display: block;">Capitaneria di Porto (Numero Blu)</span>
     </div>
     <div style="background: white; padding: 1.5rem; border-radius: 6px; box-shadow: 0 4px 20px rgba(0,0,0,.04); border-left: 4px solid var(--sea);">
       <h3 style="font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep); margin-bottom: 0.4rem; font-weight:400;">Carabinieri</h3>
@@ -270,7 +273,7 @@ var EVENTI_MENSILI = [
   { mese: 7, nomeMese: "Agosto", evento: "Sagra del Pesce Azzurro e Movida Estiva", data: "Agosto", desc: "Degustazioni di pescato locale sul lungomare, stand gastronomici e concerti sotto le stelle.", foto: "https://images.unsplash.com/photo-1534080391025-a7de5998df31?w=600&auto=format&fit=crop" },
   { mese: 8, nomeMese: "Settembre", evento: "Festa della Vendemmia", data: "Settembre", desc: "Rievocazione della pigiatura dell'uva e degustazione dei rinomati vini delle colline cosentine.", foto: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600&auto=format&fit=crop" },
   { mese: 9, nomeMese: "Ottobre", evento: "Autunno nel Borgo", data: "Ottobre", desc: "Castagne, vino novello e riscoperta degli antichi mestieri tra i vicoli del Castello Ruffo.", foto: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&auto=format&fit=crop" },
-  { mese: 10, nomeMese: "Novembre", evento: "Festa di San Martino", data: "11 Novembre", desc: "Apertura delle botti e assaggi di piatti tipici della tradizione contadina calabrese.", foto: "https://images.unsplash.com/photo-1543257580-7269da773bf5?w=600&auto=format&fit=crop" },
+  { mese: 10, nomeMese: "Novembre", evento: "Festa di San Martino", data: "11 Novembre", desc: "Apertura delle botti e assaggi di piatti tipici della traditione contadina calabrese.", foto: "https://images.unsplash.com/photo-1543257580-7269da773bf5?w=600&auto=format&fit=crop" },
   { mese: 11, nomeMese: "Dicembre", evento: "I Mercatini di Natale e Presepe Vivente", data: "Dicembre", desc: "Il centro storico si trasforma in una magica atmosfera natalizia con luci, zampognari e scene sacre.", foto: "https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop" }
 ];
 
@@ -334,5 +337,3 @@ buildEventiAutomatici();
 </script>
 </body>
 </html>
-
-```
